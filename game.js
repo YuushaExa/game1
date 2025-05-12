@@ -1,4 +1,20 @@
+    const gameState = {
+    points: 0,
+    pointsPerClick: 1,
+    pointsPerSecond: 0,
+    upgrades: {
+        click: { cost: 10, increase: 1 },
+        auto: { cost: 50, increase: 1 },
+        mega: { cost: 200, increase: 5 }
+    },
+    currentScene: "start_screen",
+    previousScene: null,
+    language: "en",
+    volume: 1.0
+};
+
 const gameData = {
+
     scenes: {
         start_screen: {
             html: `
@@ -41,6 +57,7 @@ const gameData = {
                          <button class="start-btn" next_scene="block_2">Start 2</button>
                                                      <button class="start-btn" next_scene="block_3">Start Game3</button>
                     <button class="options-btn" next_scene="options">Options</button>
+                                                <p>You currently have ${gameState.points} points in your adventure.</p>
                         </div>
             `,
             next_scene: "block_1"
@@ -103,7 +120,8 @@ const gameData = {
         <div class="stats">Points Per Second: <span id="points-per-second">0</span></div>
         
         <button id="click-button">Click Me!</button>
-        
+                                    <button class="start-btn" next_scene="start_screen">Start screen</button>
+
         <div id="upgrades">
             <h2>Upgrades</h2>
             <button class="upgrade" id="upgrade-click">
@@ -118,16 +136,8 @@ const gameData = {
         </div>
     </div>`,
     onRender: function() {
-         const game = {
-            points: 0,
-            pointsPerClick: 1,
-            pointsPerSecond: 0,
-            upgrades: {
-                click: { cost: 10, increase: 1 },
-                auto: { cost: 50, increase: 1 },
-                mega: { cost: 200, increase: 5 }
-            }
-        };
+              const pointsElement = document.getElementById('points');
+
 
         // DOM elements
         const pointsElement = document.getElementById('points');
@@ -151,8 +161,8 @@ const gameData = {
         updateUI();
 
         // Functions
-        function handleClick() {
-            game.points += game.pointsPerClick;
+         function handleClick() {
+            gameState.points += gameState.pointsPerClick;
             updateUI();
         }
 
