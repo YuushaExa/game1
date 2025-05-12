@@ -166,20 +166,20 @@ const gameData = {
         }
 
         function passiveIncome() {
-            game.points += game.pointsPerSecond;
+            gameState.points += gameState.pointsPerSecond;
             updateUI();
         }
 
         function buyUpgrade(type) {
-            const upgrade = game.upgrades[type];
+            const upgrade = gameState.upgrades[type];
             
-            if (game.points >= upgrade.cost) {
-                game.points -= upgrade.cost;
+            if (gameState.points >= upgrade.cost) {
+                gameState.points -= upgrade.cost;
                 
                 if (type === 'click' || type === 'mega') {
-                    game.pointsPerClick += upgrade.increase;
+                    gameState.pointsPerClick += upgrade.increase;
                 } else if (type === 'auto') {
-                    game.pointsPerSecond += upgrade.increase;
+                    gameState.pointsPerSecond += upgrade.increase;
                 }
                 
                 // Increase cost for next purchase
@@ -190,19 +190,19 @@ const gameData = {
         }
 
         function updateUI() {
-            pointsElement.textContent = game.points;
-            pointsPerClickElement.textContent = game.pointsPerClick;
-            pointsPerSecondElement.textContent = game.pointsPerSecond;
+            pointsElement.textContent = gameState.points;
+            pointsPerClickElement.textContent = gameState.pointsPerClick;
+            pointsPerSecondElement.textContent = gameState.pointsPerSecond;
             
             // Update upgrade buttons
-            upgradeClickButton.textContent = `Better Clicks (Cost: ${game.upgrades.click.cost}) - +${game.upgrades.click.increase} point per click`;
-            upgradeAutoButton.textContent = `Auto Clicker (Cost: ${game.upgrades.auto.cost}) - +${game.upgrades.auto.increase} point per second`;
-            upgradeMegaButton.textContent = `Mega Click (Cost: ${game.upgrades.mega.cost}) - +${game.upgrades.mega.increase} points per click`;
+            upgradeClickButton.textContent = `Better Clicks (Cost: ${gameState.upgrades.click.cost}) - +${gameState.upgrades.click.increase} point per click`;
+            upgradeAutoButton.textContent = `Auto Clicker (Cost: ${gameState.upgrades.auto.cost}) - +${gameState.upgrades.auto.increase} point per second`;
+            upgradeMegaButton.textContent = `Mega Click (Cost: ${gameState.upgrades.mega.cost}) - +${gameState.upgrades.mega.increase} points per click`;
             
             // Disable buttons if can't afford
-            upgradeClickButton.disabled = game.points < game.upgrades.click.cost;
-            upgradeAutoButton.disabled = game.points < game.upgrades.auto.cost;
-            upgradeMegaButton.disabled = game.points < game.upgrades.mega.cost;
+            upgradeClickButton.disabled = gameState.points < gameState.upgrades.click.cost;
+            upgradeAutoButton.disabled = gameState.points < gameState.upgrades.auto.cost;
+            upgradeMegaButton.disabled = gameState.points < gameState.upgrades.mega.cost;
         }
     },
                       next_scene: "block_1"
