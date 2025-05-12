@@ -168,11 +168,13 @@ const gameData = {
         // Functions
          function handleClick() {
             gameState.points += gameState.pointsPerClick;
+             updatePointsDisplay();
             updateUI();
         }
 
         function passiveIncome() {
             gameState.points += gameState.pointsPerSecond;
+            updatePointsDisplay();
             updateUI();
         }
 
