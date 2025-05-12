@@ -61,12 +61,8 @@ const gameData = {
                         </div>
             `,
              onRender: function() {
-function updateAllPointsDisplays() {
-    const displays = document.querySelectorAll('#points-display, #points');
-    displays.forEach(display => {
-        display.textContent = `You currently have ${gameState.points} points in your adventure.`;
-    });
-}
+gameState.currentScene = "start_screen";
+renderScene();
     },
             next_scene: "block_1"
         },
