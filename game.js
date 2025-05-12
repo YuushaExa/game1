@@ -57,12 +57,17 @@ const gameData = {
                          <button class="start-btn" next_scene="block_2">Start 2</button>
                                                      <button class="start-btn" next_scene="block_3">Start Game3</button>
                     <button class="options-btn" next_scene="options">Options</button>
-                                                <p>You currently have ${gameState.points} points in your adventure.</p>
+<p id="points-display">You currently have ${gameState.points} points in your adventure.</p>
                         </div>
             `,
              onRender: function() {
-renderScene();
-    },
+function updateAllPointsDisplays() {
+    const displays = document.querySelectorAll('#points-display, #points');
+    displays.forEach(display => {
+        display.textContent = `You currently have ${gameState.points} points in your adventure.`;
+    });
+}
+             },
             next_scene: "block_1"
         },
         block_1: {
