@@ -61,7 +61,6 @@ const gameData = {
                         </div>
             `,
              onRender: function() {
-gameState.currentScene = "start_screen";
 renderScene();
     },
             next_scene: "block_1"
