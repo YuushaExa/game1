@@ -62,7 +62,7 @@ const gameData = {
             `,
              onRender: function() {
 function updatePointsDisplay() {
-    const pointsDisplay = document.querySelector("#start_screen p");
+    const pointsDisplay = document.getElementById('pointsDisplay');
     if (pointsDisplay) {
         pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
     }
