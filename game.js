@@ -1,4 +1,10 @@
-    const gameState = {
+function updatePointsDisplay() {
+    const pointsDisplay = document.getElementById('pointsDisplay');
+    if (pointsDisplay) {
+        pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
+    }
+}
+const gameState = {
     points: 0,
     pointsPerClick: 1,
     pointsPerSecond: 0,
@@ -60,14 +66,6 @@ const gameData = {
 <p id="pointsDisplay">You currently have points in your adventure.</p>
                         </div>
             `,
-             onRender: function() {
-function updatePointsDisplay() {
-    const pointsDisplay = document.getElementById('pointsDisplay');
-    if (pointsDisplay) {
-        pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
-    }
-}
-             },
             next_scene: "block_1"
         },
         block_1: {
