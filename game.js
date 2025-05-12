@@ -1,6 +1,7 @@
 function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('pointsDisplay');
     if (pointsDisplay) {
+        pointsDisplay.style.transition = 'all 0.3s ease-out';
         pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
     }
 }
