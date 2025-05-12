@@ -39,6 +39,7 @@ const gameData = {
                             <div class="title">Visual Novel</div>
                             <button class="start-btn" next_scene="block_1">Start Game</button>
                          <button class="start-btn" next_scene="block_2">Start 2</button>
+                                                     <button class="start-btn" next_scene="block_3">Start Game3</button>
                     <button class="options-btn" next_scene="options">Options</button>
                         </div>
             `,
@@ -87,6 +88,113 @@ const gameData = {
             button.style.backgroundColor = colors[currentColorIndex];
             button.style.color = "white";
         });
+    },
+                      next_scene: "block_1"
+        },
+            block_3: {
+            background: {
+                type: "color",
+                source: "#f0f0f0"
+            },
+        html: `    <div id="game-container">
+        <h1>Clicker Game</h1>
+        <div class="stats">Points: <span id="points">0</span></div>
+        <div class="stats">Points Per Click: <span id="points-per-click">1</span></div>
+        <div class="stats">Points Per Second: <span id="points-per-second">0</span></div>
+        
+        <button id="click-button">Click Me!</button>
+        
+        <div id="upgrades">
+            <h2>Upgrades</h2>
+            <button class="upgrade" id="upgrade-click">
+                Better Clicks (Cost: 10) - +1 point per click
+            </button>
+            <button class="upgrade" id="upgrade-auto">
+                Auto Clicker (Cost: 50) - +1 point per second
+            </button>
+            <button class="upgrade" id="upgrade-mega">
+                Mega Click (Cost: 200) - +5 points per click
+            </button>
+        </div>
+    </div>`,
+    onRender: function() {
+         const game = {
+            points: 0,
+            pointsPerClick: 1,
+            pointsPerSecond: 0,
+            upgrades: {
+                click: { cost: 10, increase: 1 },
+                auto: { cost: 50, increase: 1 },
+                mega: { cost: 200, increase: 5 }
+            }
+        };
+
+        // DOM elements
+        const pointsElement = document.getElementById('points');
+        const pointsPerClickElement = document.getElementById('points-per-click');
+        const pointsPerSecondElement = document.getElementById('points-per-second');
+        const clickButton = document.getElementById('click-button');
+        const upgradeClickButton = document.getElementById('upgrade-click');
+        const upgradeAutoButton = document.getElementById('upgrade-auto');
+        const upgradeMegaButton = document.getElementById('upgrade-mega');
+
+        // Event listeners
+        clickButton.addEventListener('click', handleClick);
+        upgradeClickButton.addEventListener('click', () => buyUpgrade('click'));
+        upgradeAutoButton.addEventListener('click', () => buyUpgrade('auto'));
+        upgradeMegaButton.addEventListener('click', () => buyUpgrade('mega'));
+
+        // Game loop for passive income
+        setInterval(passiveIncome, 1000);
+
+        // Update UI initially
+        updateUI();
+
+        // Functions
+        function handleClick() {
+            game.points += game.pointsPerClick;
+            updateUI();
+        }
+
+        function passiveIncome() {
+            game.points += game.pointsPerSecond;
+            updateUI();
+        }
+
+        function buyUpgrade(type) {
+            const upgrade = game.upgrades[type];
+            
+            if (game.points >= upgrade.cost) {
+                game.points -= upgrade.cost;
+                
+                if (type === 'click' || type === 'mega') {
+                    game.pointsPerClick += upgrade.increase;
+                } else if (type === 'auto') {
+                    game.pointsPerSecond += upgrade.increase;
+                }
+                
+                // Increase cost for next purchase
+                upgrade.cost = Math.floor(upgrade.cost * 1.5);
+                
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            pointsElement.textContent = game.points;
+            pointsPerClickElement.textContent = game.pointsPerClick;
+            pointsPerSecondElement.textContent = game.pointsPerSecond;
+            
+            // Update upgrade buttons
+            upgradeClickButton.textContent = `Better Clicks (Cost: ${game.upgrades.click.cost}) - +${game.upgrades.click.increase} point per click`;
+            upgradeAutoButton.textContent = `Auto Clicker (Cost: ${game.upgrades.auto.cost}) - +${game.upgrades.auto.increase} point per second`;
+            upgradeMegaButton.textContent = `Mega Click (Cost: ${game.upgrades.mega.cost}) - +${game.upgrades.mega.increase} points per click`;
+            
+            // Disable buttons if can't afford
+            upgradeClickButton.disabled = game.points < game.upgrades.click.cost;
+            upgradeAutoButton.disabled = game.points < game.upgrades.auto.cost;
+            upgradeMegaButton.disabled = game.points < game.upgrades.mega.cost;
+        }
     },
                       next_scene: "block_1"
         },
