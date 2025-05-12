@@ -127,6 +127,7 @@ onRender: function() {
     setInterval(function() {
   gameState.counter++;
             counterDisplay.textContent = `Counter: ${gameState.counter}`;
+        updatePointsDisplay();
     }, 2000); // 2000 milliseconds = 2 seconds
 },
                       next_scene: "block_1"
