@@ -61,9 +61,11 @@ const gameData = {
                         </div>
             `,
              onRender: function() {
- const pointsDisplay = document.querySelector('.start_screen p');
-if (pointsDisplay) {
-    pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
+function updateAllPointsDisplays() {
+    const displays = document.querySelectorAll('#points-display, #points');
+    displays.forEach(display => {
+        display.textContent = `You currently have ${gameState.points} points in your adventure.`;
+    });
 }
     },
             next_scene: "block_1"
