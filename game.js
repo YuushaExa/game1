@@ -2,7 +2,7 @@ function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('pointsDisplay');
     if (pointsDisplay) {
         pointsDisplay.style.transition = 'all 0.3s ease-out';
-        pointsDisplay.textContent = `You currently have ${gameState.points} ${gameState.counter} points in your adventure.`;
+        pointsDisplay.textContent = `You currently have points ${gameState.points} counter ${gameState.counter} points in your adventure.`;
     }
 }
 const gameState = {
@@ -65,7 +65,7 @@ const gameData = {
                          <button class="start-btn" next_scene="block_2">Start 2</button>
                                                      <button class="start-btn" next_scene="block_3">Start Game3</button>
                     <button class="options-btn" next_scene="options">Options</button>
-<p id="pointsDisplay">You currently have points in your adventure.</p>
+<p id="pointsDisplay">You currently have points 0 counter 0 in your adventure.</p>
                         </div>
             `,
             next_scene: "block_1"
