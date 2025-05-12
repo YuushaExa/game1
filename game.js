@@ -2,11 +2,12 @@ function updatePointsDisplay() {
     const pointsDisplay = document.getElementById('pointsDisplay');
     if (pointsDisplay) {
         pointsDisplay.style.transition = 'all 0.3s ease-out';
-        pointsDisplay.textContent = `You currently have ${gameState.points} points in your adventure.`;
+        pointsDisplay.textContent = `You currently have ${gameState.points} ${gameState.counter} points in your adventure.`;
     }
 }
 const gameState = {
     points: 0,
+     counter: 0, 
     pointsPerClick: 1,
     pointsPerSecond: 0,
     upgrades: {
@@ -123,8 +124,8 @@ onRender: function() {
 
     // Auto-increment counter every 2 seconds
     setInterval(function() {
-        counter++;
-        counterDisplay.textContent = `Counter: ${counter}`;
+  gameState.counter++;
+            counterDisplay.textContent = `Counter: ${gameState.counter}`;
     }, 2000); // 2000 milliseconds = 2 seconds
 },
                       next_scene: "block_1"
