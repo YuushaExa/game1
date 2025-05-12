@@ -105,30 +105,28 @@ const gameData = {
         html: `<button id="colorButton">Click me to change color</button>                                     <button class="start-btn" next_scene="start_screen">Start screen</button>
 `,
 onRender: function() {
-    const button = document.getElementById("colorButton");
-    const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-    let currentColorIndex = 0;
-    let counter = 0;
+   onRender: function() {
+        const button = document.getElementById("colorButton");
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+        let currentColorIndex = 0;
 
-    // Display counter (you might want to add this element to your HTML)
-    const counterDisplay = document.createElement("div");
-    counterDisplay.id = "counterDisplay";
-    counterDisplay.textContent = `Counter: ${counter}`;
-    button.parentNode.insertBefore(counterDisplay, button.nextSibling);
+        // Click handler for color change
+        button.addEventListener("click", function() {
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+            button.style.backgroundColor = colors[currentColorIndex];
+            button.style.color = "white";
+        });
 
-    // Click handler for color change
-    button.addEventListener("click", function() {
-        currentColorIndex = (currentColorIndex + 1) % colors.length;
-        button.style.backgroundColor = colors[currentColorIndex];
-        button.style.color = "white";
-    });
-
-    // Auto-increment counter every 2 seconds
-    setInterval(function() {
-  gameState.counter++;
-            counterDisplay.textContent = `Counter: ${gameState.counter}`;
-        updatePointsDisplay();
-    }, 2000); // 2000 milliseconds = 2 seconds
+        // Auto-increment counter every 2 seconds
+        const intervalId = setInterval(function() {
+            gameState.counter++;
+            document.getElementById("counterDisplay").textContent = `Counter: ${gameState.counter}`;
+            updatePointsDisplay();
+        }, 2000);
+        
+        // Store the interval ID so it can be cleared later
+        window.vnEngine.activeIntervals.push(intervalId);
+    },
 },
                       next_scene: "block_1"
         },
@@ -178,7 +176,8 @@ onRender: function() {
         upgradeMegaButton.addEventListener('click', () => buyUpgrade('mega'));
 
         // Game loop for passive income
-        setInterval(passiveIncome, 1000);
+  const gameLoopInterval = setInterval(passiveIncome, 1000);
+        window.vnEngine.activeIntervals.push(gameLoopInterval);
 
         // Update UI initially
         updateUI();
