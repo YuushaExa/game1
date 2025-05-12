@@ -105,7 +105,6 @@ const gameData = {
         html: `<button id="colorButton">Click me to change color</button>                                     <button class="start-btn" next_scene="start_screen">Start screen</button>
 `,
 onRender: function() {
-   onRender: function() {
         const button = document.getElementById("colorButton");
         const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
         let currentColorIndex = 0;
@@ -126,7 +125,6 @@ onRender: function() {
         
         // Store the interval ID so it can be cleared later
         window.vnEngine.activeIntervals.push(intervalId);
-    },
 },
                       next_scene: "block_1"
         },
