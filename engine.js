@@ -29,6 +29,10 @@ class VisualNovelEngine {
         const scene = this.scenesData[sceneId];
         this.currentScene = sceneId;
         this.mainDiv.innerHTML = scene.html || '';
+
+         if (scene.onRender) {
+            scene.onRender();
+        }
     }
 }
 
