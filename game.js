@@ -102,7 +102,8 @@ const gameData = {
                 type: "color",
                 source: "#f0f0f0"
             },
-        html: `<button id="colorButton">Click me to change color</button>`,
+        html: `<button id="colorButton">Click me to change color</button>                                     <button class="start-btn" next_scene="start_screen">Start screen</button>
+`,
 onRender: function() {
     const button = document.getElementById("colorButton");
     const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
