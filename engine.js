@@ -30,6 +30,7 @@ class VisualNovelEngine {
         this.currentScene = sceneId;
         this.mainDiv.innerHTML = scene.html || '';
 updatePointsDisplay();
+        counterDisplay.textContent = `Counter: ${gameState.counter}`;
          if (scene.onRender) {
             scene.onRender();
         }
