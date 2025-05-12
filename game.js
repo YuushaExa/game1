@@ -136,7 +136,6 @@ const gameData = {
         </div>
     </div>`,
     onRender: function() {
-              const pointsElement = document.getElementById('points');
 
 
         // DOM elements
