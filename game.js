@@ -102,17 +102,31 @@ const gameData = {
                 source: "#f0f0f0"
             },
         html: `<button id="colorButton">Click me to change color</button>`,
-    onRender: function() {
-        const button = document.getElementById("colorButton");
-        const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-        let currentColorIndex = 0;
+onRender: function() {
+    const button = document.getElementById("colorButton");
+    const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+    let currentColorIndex = 0;
+    let counter = 0;
 
-        button.addEventListener("click", function() {
-            currentColorIndex = (currentColorIndex + 1) % colors.length;
-            button.style.backgroundColor = colors[currentColorIndex];
-            button.style.color = "white";
-        });
-    },
+    // Display counter (you might want to add this element to your HTML)
+    const counterDisplay = document.createElement("div");
+    counterDisplay.id = "counterDisplay";
+    counterDisplay.textContent = `Counter: ${counter}`;
+    button.parentNode.insertBefore(counterDisplay, button.nextSibling);
+
+    // Click handler for color change
+    button.addEventListener("click", function() {
+        currentColorIndex = (currentColorIndex + 1) % colors.length;
+        button.style.backgroundColor = colors[currentColorIndex];
+        button.style.color = "white";
+    });
+
+    // Auto-increment counter every 2 seconds
+    setInterval(function() {
+        counter++;
+        counterDisplay.textContent = `Counter: ${counter}`;
+    }, 2000); // 2000 milliseconds = 2 seconds
+},
                       next_scene: "block_1"
         },
             block_3: {
