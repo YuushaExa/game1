@@ -29,7 +29,7 @@ class VisualNovelEngine {
         const scene = this.scenesData[sceneId];
         this.currentScene = sceneId;
         this.mainDiv.innerHTML = scene.html || '';
-
+updatePointsDisplay();
          if (scene.onRender) {
             scene.onRender();
         }
